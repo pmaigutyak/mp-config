@@ -9,15 +9,22 @@ from site_config.models import ConfigField
 
 class ConfigFieldAdmin(TranslationAdmin):
 
-    list_display = ['label', 'name', 'type', 'splitter']
+    list_display = ['label', 'name', 'type', 'splitter', 'short_value']
+
+    def _get_config_fields(self, obj=None):
+
+        if obj is None:
+            return ['label', 'name', 'type', 'splitter']
+
+        f_name = obj.value_field_name
+
+        if f_name in self.trans_opts.fields:
+            return get_translation_fields(f_name)
+
+        return [f_name]
 
     def get_form(self, request, obj=None, fields=None, **kwargs):
-
-        if obj is not None:
-            fields = get_translation_fields(obj.value_field_name)
-        else:
-            fields = ['label', 'name', 'type', 'splitter']
-
+        fields = self._get_config_fields(obj)
         return super(ConfigFieldAdmin, self).get_form(
             request, obj=obj, fields=fields, **kwargs)
 

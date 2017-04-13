@@ -1,12 +1,14 @@
 
 from django.db import models
-from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
 
+FIELD_TYPE_INPUT = 'input'
+FIELD_TYPE_TEXT = 'text'
+
 FIELD_TYPES = (
-    ('input', _("Input")),
-    ('text', _("Text")),
+    (FIELD_TYPE_INPUT, _("Input")),
+    (FIELD_TYPE_TEXT, _("Text")),
     ('int', _("Integer")),
     ('float', _("Float")),
     ('bool', _("True / False")),
@@ -30,6 +32,8 @@ SPLIT_CHOICES = (
 
 class ConfigField(models.Model):
 
+    SPLIT_TYPES = [FIELD_TYPE_TEXT, FIELD_TYPE_INPUT]
+
     label = models.CharField(_('Label'), max_length=255)
 
     name = models.CharField(_('Name'), max_length=255)
@@ -38,7 +42,8 @@ class ConfigField(models.Model):
 
     splitter = models.CharField(
         _('Splitter'), max_length=10, blank=True, null=True,
-        choices=SPLIT_CHOICES)
+        choices=SPLIT_CHOICES,
+        help_text=_('Available only for types: %s') % ', '.join(SPLIT_TYPES))
 
     value_input = models.CharField(
         _('Text'), max_length=255, blank=True, null=True)
@@ -77,6 +82,21 @@ class ConfigField(models.Model):
 
         return splitter
 
+    @property
+    def short_value(self):
+
+        value = self.value
+
+        if isinstance(value, list):
+            value = ', '.join(value)
+
+        if self.type == FIELD_TYPE_TEXT:
+            return value[:255]
+
+        return value
+
+    short_value.fget.short_description = _('Short value')
+
     def _get_value(self):
 
         value = getattr(self, self.value_field_name)
@@ -86,8 +106,8 @@ class ConfigField(models.Model):
 
         splitter = self.get_splitter()
 
-        if self.type in ['input', 'text'] and splitter is not None:
-            return value.split(mark_safe(splitter))
+        if self.type in self.SPLIT_TYPES and splitter is not None:
+            return value.split(splitter)
 
         return value
 

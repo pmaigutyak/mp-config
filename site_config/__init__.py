@@ -40,6 +40,6 @@ config = SiteConfig()
 default_app_config = 'site_config.SiteConfigApp'
 
 
-__version__ = '1.3'
+__version__ = '1.4'
 
 __all__ = ['config', 'default_app_config']

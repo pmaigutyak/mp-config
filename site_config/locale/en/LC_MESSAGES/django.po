@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-13 04:12+0000\n"
+"POT-Creation-Date: 2017-04-13 06:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,82 +17,95 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: site_config/models.py:8
+#: site_config/__init__.py:8
+msgid "Settings"
+msgstr ""
+
+#: site_config/models.py:10
 msgid "Input"
 msgstr ""
 
-#: site_config/models.py:9 site_config/models.py:44 site_config/models.py:47
+#: site_config/models.py:11 site_config/models.py:49 site_config/models.py:52
 msgid "Text"
 msgstr ""
 
-#: site_config/models.py:10 site_config/models.py:49
+#: site_config/models.py:12 site_config/models.py:54
 msgid "Integer"
 msgstr ""
 
-#: site_config/models.py:11 site_config/models.py:51
+#: site_config/models.py:13 site_config/models.py:56
 msgid "Float"
 msgstr ""
 
-#: site_config/models.py:12
+#: site_config/models.py:14
 msgid "True / False"
 msgstr ""
 
-#: site_config/models.py:13 site_config/models.py:55
+#: site_config/models.py:15 site_config/models.py:60
 msgid "Url"
 msgstr ""
 
-#: site_config/models.py:14 site_config/models.py:57
+#: site_config/models.py:16 site_config/models.py:62
 msgid "Email"
 msgstr ""
 
-#: site_config/models.py:15 site_config/models.py:60
+#: site_config/models.py:17 site_config/models.py:65
 msgid "File"
 msgstr ""
 
-#: site_config/models.py:16 site_config/models.py:63
+#: site_config/models.py:18 site_config/models.py:68
 msgid "Image"
 msgstr ""
 
-#: site_config/models.py:23
+#: site_config/models.py:25
 msgid "New line"
 msgstr ""
 
-#: site_config/models.py:24
+#: site_config/models.py:26
 msgid "Comma"
 msgstr ""
 
-#: site_config/models.py:25
+#: site_config/models.py:27
 msgid "Dot"
 msgstr ""
 
-#: site_config/models.py:26
+#: site_config/models.py:28
 msgid "Semicolon"
 msgstr ""
 
-#: site_config/models.py:27
+#: site_config/models.py:29
 msgid "Tab"
 msgstr ""
 
-#: site_config/models.py:33
+#: site_config/models.py:37
 msgid "Label"
 msgstr ""
 
-#: site_config/models.py:35
+#: site_config/models.py:39
 msgid "Name"
 msgstr ""
 
-#: site_config/models.py:37
+#: site_config/models.py:41
 msgid "Type"
 msgstr ""
 
-#: site_config/models.py:40
+#: site_config/models.py:44
 msgid "Splitter"
 msgstr ""
 
-#: site_config/models.py:53
+#: site_config/models.py:46
+#, python-format
+msgid "Available only for types: %s"
+msgstr ""
+
+#: site_config/models.py:58
 msgid "Boolean"
 msgstr ""
 
-#: site_config/models.py:101
+#: site_config/models.py:98
+msgid "Short value"
+msgstr ""
+
+#: site_config/models.py:121
 msgid "settings"
 msgstr ""
