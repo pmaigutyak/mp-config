@@ -1,0 +1,100 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-13 04:12+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: site_config/models.py:8
+msgid "Input"
+msgstr "Текст (до 255 символів)"
+
+#: site_config/models.py:9 site_config/models.py:44 site_config/models.py:47
+msgid "Text"
+msgstr "Текст (до 10 000 символів)"
+
+#: site_config/models.py:10 site_config/models.py:49
+msgid "Integer"
+msgstr "Ціле число"
+
+#: site_config/models.py:11 site_config/models.py:51
+msgid "Float"
+msgstr "Десяткове число"
+
+#: site_config/models.py:12
+msgid "True / False"
+msgstr "Так / Ні"
+
+#: site_config/models.py:13 site_config/models.py:55
+msgid "Url"
+msgstr ""
+
+#: site_config/models.py:14 site_config/models.py:57
+msgid "Email"
+msgstr ""
+
+#: site_config/models.py:15 site_config/models.py:60
+msgid "File"
+msgstr "Файл"
+
+#: site_config/models.py:16 site_config/models.py:63
+msgid "Image"
+msgstr "Зображення"
+
+#: site_config/models.py:23
+msgid "New line"
+msgstr "Новий рядок"
+
+#: site_config/models.py:24
+msgid "Comma"
+msgstr "Кома"
+
+#: site_config/models.py:25
+msgid "Dot"
+msgstr "Крапка"
+
+#: site_config/models.py:26
+msgid "Semicolon"
+msgstr "Крапка з комою"
+
+#: site_config/models.py:27
+msgid "Tab"
+msgstr "Пробіл"
+
+#: site_config/models.py:33
+msgid "Label"
+msgstr "Повна назва"
+
+#: site_config/models.py:35
+msgid "Name"
+msgstr "Назва"
+
+#: site_config/models.py:37
+msgid "Type"
+msgstr "Тип"
+
+#: site_config/models.py:40
+msgid "Splitter"
+msgstr "Роздільник"
+
+#: site_config/models.py:53
+msgid "Boolean"
+msgstr "Булева змінна"
+
+#: site_config/models.py:101
+msgid "settings"
+msgstr "налаштування"

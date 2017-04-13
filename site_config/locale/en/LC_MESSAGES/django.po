@@ -1,0 +1,98 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-13 04:12+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: site_config/models.py:8
+msgid "Input"
+msgstr ""
+
+#: site_config/models.py:9 site_config/models.py:44 site_config/models.py:47
+msgid "Text"
+msgstr ""
+
+#: site_config/models.py:10 site_config/models.py:49
+msgid "Integer"
+msgstr ""
+
+#: site_config/models.py:11 site_config/models.py:51
+msgid "Float"
+msgstr ""
+
+#: site_config/models.py:12
+msgid "True / False"
+msgstr ""
+
+#: site_config/models.py:13 site_config/models.py:55
+msgid "Url"
+msgstr ""
+
+#: site_config/models.py:14 site_config/models.py:57
+msgid "Email"
+msgstr ""
+
+#: site_config/models.py:15 site_config/models.py:60
+msgid "File"
+msgstr ""
+
+#: site_config/models.py:16 site_config/models.py:63
+msgid "Image"
+msgstr ""
+
+#: site_config/models.py:23
+msgid "New line"
+msgstr ""
+
+#: site_config/models.py:24
+msgid "Comma"
+msgstr ""
+
+#: site_config/models.py:25
+msgid "Dot"
+msgstr ""
+
+#: site_config/models.py:26
+msgid "Semicolon"
+msgstr ""
+
+#: site_config/models.py:27
+msgid "Tab"
+msgstr ""
+
+#: site_config/models.py:33
+msgid "Label"
+msgstr ""
+
+#: site_config/models.py:35
+msgid "Name"
+msgstr ""
+
+#: site_config/models.py:37
+msgid "Type"
+msgstr ""
+
+#: site_config/models.py:40
+msgid "Splitter"
+msgstr ""
+
+#: site_config/models.py:53
+msgid "Boolean"
+msgstr ""
+
+#: site_config/models.py:101
+msgid "settings"
+msgstr ""
