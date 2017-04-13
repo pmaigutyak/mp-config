@@ -1,5 +1,11 @@
 
-from django.apps import apps
+from django.apps import apps, AppConfig
+from django.utils.translation import ugettext_lazy as _
+
+
+class SiteConfigApp(AppConfig):
+    name = 'site_config'
+    verbose_name = _("Settings")
 
 
 class SiteConfig(object):
@@ -31,8 +37,9 @@ class SiteConfig(object):
 
 
 config = SiteConfig()
+default_app_config = 'site_config.SiteConfigApp'
 
 
-__version__ = '1.0'
+__version__ = '1.1'
 
-__all__ = ['config']
+__all__ = ['config', 'default_app_config']

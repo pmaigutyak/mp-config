@@ -6,7 +6,7 @@ from site_config.models import ConfigField
 
 class ConfigFieldAdmin(admin.ModelAdmin):
 
-    list_display = ['label', 'name', 'type', 'splitter', 'is_required']
+    list_display = ['label', 'name', 'type', 'splitter']
 
     fields = ['label', 'name', 'type', 'splitter']
 
