@@ -1,10 +1,12 @@
 
 from django.contrib import admin
 
+from modeltranslation.admin import TranslationAdmin
+
 from site_config.models import ConfigField
 
 
-class ConfigFieldAdmin(admin.ModelAdmin):
+class ConfigFieldAdmin(TranslationAdmin):
 
     list_display = ['label', 'name', 'type', 'splitter']
 
