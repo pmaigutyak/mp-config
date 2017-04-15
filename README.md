@@ -23,6 +23,13 @@ $ pip install django-mp-config
 
 Add config to settings.py:
 ```
+class SuitConfig(DjangoSuitConfig):
+
+    menu = (
+        ...,
+        ParentItem(app='site_config'),
+    )
+    
 INSTALLED_APPS = [
     'site_config',
 ]
@@ -31,6 +38,10 @@ INSTALLED_APPS = [
 Run migrations:
 ```
 $ python manage.py migrate
+```
+Sync translation fields:
+```
+$ python manage.py sync_translation_fields
 ```
 
 ### Usage
