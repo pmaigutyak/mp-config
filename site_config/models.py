@@ -1,10 +1,13 @@
 
+import json
+
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 
 FIELD_TYPE_INPUT = 'input'
 FIELD_TYPE_TEXT = 'text'
+FIELD_TYPE_JSON = 'json'
 
 FIELD_TYPES = (
     (FIELD_TYPE_INPUT, _("Input")),
@@ -16,7 +19,7 @@ FIELD_TYPES = (
     ('email', _("Email")),
     ('file', _("File")),
     ('image', _("Image")),
-    ('json', _('JSON')),
+    (FIELD_TYPE_JSON, _('JSON')),
 )
 
 
@@ -34,6 +37,13 @@ SPLIT_CHOICES = (
 class ConfigGroup(models.Model):
 
     name = models.CharField(_('Name'), max_length=255, unique=True)
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = _('Config group')
+        verbose_name_plural = _('Config groups')
 
 
 class ConfigField(models.Model):
@@ -75,6 +85,9 @@ class ConfigField(models.Model):
     value_image = models.ImageField(
         _('Image'), blank=True, null=True, upload_to='site_config')
 
+    value_json = models.TextField(
+        _('Text'), max_length=10000, blank=True, null=True)
+
     def __unicode__(self):
         return self.label
 
@@ -111,6 +124,9 @@ class ConfigField(models.Model):
 
         if not value:
             return ''
+
+        if self.type == FIELD_TYPE_JSON:
+            return json.loads(value)
 
         splitter = self.get_splitter()
 
