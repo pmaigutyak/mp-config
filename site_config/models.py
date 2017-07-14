@@ -16,6 +16,7 @@ FIELD_TYPES = (
     ('email', _("Email")),
     ('file', _("File")),
     ('image', _("Image")),
+    ('json', _('JSON')),
 )
 
 
@@ -30,9 +31,16 @@ SPLIT_CHOICES = (
 )
 
 
+class ConfigGroup(models.Model):
+
+    name = models.CharField(_('Name'), max_length=255, unique=True)
+
+
 class ConfigField(models.Model):
 
     SPLIT_TYPES = [FIELD_TYPE_TEXT, FIELD_TYPE_INPUT]
+
+    group = models.ForeignKey(ConfigGroup, null=True)
 
     label = models.CharField(_('Label'), max_length=255)
 
