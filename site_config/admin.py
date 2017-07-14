@@ -4,17 +4,20 @@ from django.contrib import admin
 from modeltranslation.utils import get_translation_fields
 from modeltranslation.admin import TranslationAdmin
 
-from site_config.models import ConfigField
+from site_config.models import ConfigField, ConfigGroup
 
 
 class ConfigFieldAdmin(TranslationAdmin):
 
-    list_display = ['label', 'name', 'type', 'splitter', 'short_value']
+    list_display = [
+        'label', 'name', 'type', 'splitter', 'short_value', 'group']
+
+    list_filter = ['group']
 
     def _get_config_fields(self, obj=None):
 
         if obj is None:
-            return ['label', 'name', 'type', 'splitter']
+            return ['group', 'label', 'name', 'type', 'splitter']
 
         f_name = obj.value_field_name
 
@@ -30,3 +33,4 @@ class ConfigFieldAdmin(TranslationAdmin):
 
 
 admin.site.register(ConfigField, ConfigFieldAdmin)
+admin.site.register(ConfigGroup)
