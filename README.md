@@ -5,6 +5,7 @@ Supported field types:
 
 * CharField
 * TextField
+* HTMLField
 * IntegerField
 * FloatField
 * BooleanField
@@ -23,13 +24,6 @@ $ pip install django-mp-config
 
 Add config to settings.py:
 ```
-class SuitConfig(DjangoSuitConfig):
-
-    menu = (
-        ...,
-        ParentItem(app='site_config'),
-    )
-    
 INSTALLED_APPS = [
     'site_config',
 ]
@@ -68,3 +62,4 @@ Examples:
 App require this packages:
 
 * django-modeltranslation
+* beautifulsoup4
