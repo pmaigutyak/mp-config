@@ -1,1 +1,2 @@
-django-modeltranslation==0.11
+django-modeltranslation
+beautifulsoup4

@@ -1,4 +1,6 @@
 
+from django.apps import apps
+from django.db import models
 from django.contrib import admin
 
 from modeltranslation.utils import get_translation_fields
@@ -27,7 +29,21 @@ class ConfigFieldAdmin(TranslationAdmin):
         return [f_name]
 
     def get_form(self, request, obj=None, fields=None, **kwargs):
+
         fields = self._get_config_fields(obj)
+
+        if apps.is_installed('ckeditor_uploader'):
+            from ckeditor_uploader.widgets import CKEditorUploadingWidget
+            self.formfield_overrides = {
+                models.TextField: {'widget': CKEditorUploadingWidget}
+            }
+
+        elif apps.is_installed('ckeditor'):
+            from ckeditor.widgets import CKEditorWidget
+            self.formfield_overrides = {
+                models.TextField: {'widget': CKEditorWidget}
+            }
+
         return super(ConfigFieldAdmin, self).get_form(
             request, obj=obj, fields=fields, **kwargs)
 

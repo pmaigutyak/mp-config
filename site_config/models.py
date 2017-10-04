@@ -1,17 +1,22 @@
 
 import json
 
+from bs4 import BeautifulSoup
+
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.utils.safestring import mark_safe
 
 
 FIELD_TYPE_INPUT = 'input'
 FIELD_TYPE_TEXT = 'text'
+FIELD_TYPE_HTML = 'html'
 FIELD_TYPE_JSON = 'json'
 
 FIELD_TYPES = (
     (FIELD_TYPE_INPUT, _("Input")),
     (FIELD_TYPE_TEXT, _("Text")),
+    (FIELD_TYPE_HTML, _("HTML")),
     ('int', _("Integer")),
     ('float', _("Float")),
     ('bool', _("True / False")),
@@ -50,7 +55,7 @@ class ConfigField(models.Model):
 
     SPLIT_TYPES = [FIELD_TYPE_TEXT, FIELD_TYPE_INPUT]
 
-    group = models.ForeignKey(ConfigGroup, null=True)
+    group = models.ForeignKey(ConfigGroup, null=True, blank=True)
 
     label = models.CharField(_('Label'), max_length=255)
 
@@ -93,6 +98,8 @@ class ConfigField(models.Model):
 
     @property
     def value_field_name(self):
+        if self.type == FIELD_TYPE_HTML:
+            return 'value_%s' % FIELD_TYPE_TEXT
         return 'value_%s' % self.type
 
     def get_splitter(self):
@@ -111,6 +118,10 @@ class ConfigField(models.Model):
         if isinstance(value, list):
             value = ', '.join(value)
 
+        if self.type == FIELD_TYPE_HTML:
+            soup = BeautifulSoup(value)
+            return soup.get_text()[:255]
+
         if self.type == FIELD_TYPE_TEXT:
             return value[:255]
 
@@ -124,6 +135,9 @@ class ConfigField(models.Model):
 
         if not value:
             return ''
+
+        if self.type == FIELD_TYPE_HTML:
+            return mark_safe(value)
 
         if self.type == FIELD_TYPE_JSON:
             return json.loads(value)
