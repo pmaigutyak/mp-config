@@ -119,7 +119,7 @@ class ConfigField(models.Model):
         if isinstance(value, list):
             value = ', '.join(value)
 
-        if self.type == FIELD_TYPE_HTML:
+        if self.is_html:
             soup = BeautifulSoup(value)
             return soup.get_text()[:255]
 
@@ -137,7 +137,7 @@ class ConfigField(models.Model):
         if not value:
             return ''
 
-        if self.type == FIELD_TYPE_HTML:
+        if self.is_html:
             return mark_safe(value)
 
         if self.type == FIELD_TYPE_JSON:
@@ -152,6 +152,10 @@ class ConfigField(models.Model):
 
     def _set_value(self, value):
         setattr(self, self.value_field_name, value)
+
+    @property
+    def is_html(self):
+        return self.type == FIELD_TYPE_HTML
 
     value = property(_get_value, _set_value)
 

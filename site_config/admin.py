@@ -32,17 +32,18 @@ class ConfigFieldAdmin(TranslationAdmin):
 
         fields = self._get_config_fields(obj)
 
-        if apps.is_installed('ckeditor_uploader'):
-            from ckeditor_uploader.widgets import CKEditorUploadingWidget
-            self.formfield_overrides = {
-                models.TextField: {'widget': CKEditorUploadingWidget}
-            }
+        if obj is not None and obj.is_html:
+            if apps.is_installed('ckeditor_uploader'):
+                from ckeditor_uploader.widgets import CKEditorUploadingWidget
+                self.formfield_overrides = {
+                    models.TextField: {'widget': CKEditorUploadingWidget}
+                }
 
-        elif apps.is_installed('ckeditor'):
-            from ckeditor.widgets import CKEditorWidget
-            self.formfield_overrides = {
-                models.TextField: {'widget': CKEditorWidget}
-            }
+            elif apps.is_installed('ckeditor'):
+                from ckeditor.widgets import CKEditorWidget
+                self.formfield_overrides = {
+                    models.TextField: {'widget': CKEditorWidget}
+                }
 
         return super(ConfigFieldAdmin, self).get_form(
             request, obj=obj, fields=fields, **kwargs)
