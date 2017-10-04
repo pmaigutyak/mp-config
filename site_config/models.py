@@ -120,7 +120,7 @@ class ConfigField(models.Model):
             value = ', '.join(value)
 
         if self.is_html:
-            soup = BeautifulSoup(value)
+            soup = BeautifulSoup(value, 'html.parser')
             return soup.get_text()[:255]
 
         if self.type == FIELD_TYPE_TEXT:
