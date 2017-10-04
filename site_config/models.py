@@ -55,7 +55,8 @@ class ConfigField(models.Model):
 
     SPLIT_TYPES = [FIELD_TYPE_TEXT, FIELD_TYPE_INPUT]
 
-    group = models.ForeignKey(ConfigGroup, null=True, blank=True)
+    group = models.ForeignKey(
+        ConfigGroup, null=True, blank=True, verbose_name=_('Group'))
 
     label = models.CharField(_('Label'), max_length=255)
 
