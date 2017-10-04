@@ -5,6 +5,7 @@ Supported field types:
 
 * CharField
 * TextField
+* HTMLField
 * IntegerField
 * FloatField
 * BooleanField
