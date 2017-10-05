@@ -70,7 +70,7 @@ class ConfigField(models.Model):
         help_text=_('Available only for types: %s') % ', '.join(SPLIT_TYPES))
 
     value_input = models.CharField(
-        _('Text'), max_length=255, blank=True, null=True)
+        _('Input'), max_length=255, blank=True, null=True)
 
     value_text = models.TextField(
         _('Text'), max_length=10000, blank=True, null=True)
@@ -160,5 +160,5 @@ class ConfigField(models.Model):
     value = property(_get_value, _set_value)
 
     class Meta:
-        ordering = ['type']
+        ordering = ['label']
         verbose_name = verbose_name_plural = _('settings')
