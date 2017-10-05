@@ -17,8 +17,6 @@ class ConfigFieldAdmin(TranslationAdmin):
 
     list_filter = ['group']
 
-    def _get_config_fields(self, obj=None):
-
     def _get_value_fields(self, obj=None):
 
         f_name = obj.value_field_name
