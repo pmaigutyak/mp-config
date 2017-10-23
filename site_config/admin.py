@@ -12,10 +12,12 @@ from site_config.models import ConfigField, ConfigGroup
 
 class ConfigFieldAdmin(TranslationAdmin):
 
-    list_display = [
-        'label', 'name', 'type', 'splitter', 'short_value', 'group']
+    CONFIG_FIELDS = ['site', 'group', 'label', 'name', 'type', 'splitter']
 
-    list_filter = ['group']
+    list_display = [
+        'label', 'name', 'site', 'type', 'splitter', 'short_value', 'group']
+
+    list_filter = ['site', 'group']
 
     def _get_value_fields(self, obj=None):
 
@@ -29,7 +31,7 @@ class ConfigFieldAdmin(TranslationAdmin):
     def get_form(self, request, obj=None, fields=None, **kwargs):
 
         if obj is None:
-            fields = ['group', 'label', 'name', 'type', 'splitter']
+            fields = self.CONFIG_FIELDS
         else:
             self.fieldsets = (
                 (
@@ -41,8 +43,7 @@ class ConfigFieldAdmin(TranslationAdmin):
                 (
                     _('Settings'),
                     {
-                        'fields': [
-                            'group', 'label', 'name', 'type', 'splitter'],
+                        'fields': self.CONFIG_FIELDS,
                         'classes': ['collapse'],
                     }
                 ),

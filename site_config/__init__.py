@@ -1,6 +1,15 @@
 
 from django.apps import apps, AppConfig
 from django.utils.translation import ugettext_lazy as _
+from django.utils.functional import cached_property
+from django.conf import settings
+
+
+default_app_config = 'site_config.SiteConfigApp'
+
+__version__ = '2.0'
+
+__all__ = ['config', 'default_app_config', 'SiteConfig', 'get_config_for_site']
 
 
 class SiteConfigApp(AppConfig):
@@ -9,6 +18,9 @@ class SiteConfigApp(AppConfig):
 
 
 class SiteConfig(object):
+
+    def __init__(self, site_id):
+        self._site_id = site_id
 
     def __getattr__(self, name):
         if name.startswith('_'):
@@ -22,24 +34,32 @@ class SiteConfig(object):
         else:
             self._get_field(key).value = value
 
-    def _get_fields(self):
-        if not hasattr(self, '_fields'):
-            field_model = apps.get_model('site_config', 'ConfigField')
-            self._fields = {f.name: f for f in field_model.objects.all()}
-
-        return self._fields
+    @cached_property
+    def _fields(self):
+        field_model = apps.get_model('site_config', 'ConfigField')
+        fields = field_model.objects.filter(site_id=self._site_id)
+        return {f.name: f for f in fields}
 
     def _get_field(self, name):
         try:
-            return self._get_fields()[name]
+            return self._fields[name]
         except KeyError:
             raise AttributeError("Site config has no field named '%s'" % name)
 
 
-config = SiteConfig()
-default_app_config = 'site_config.SiteConfigApp'
+config = SiteConfig(settings.SITE_ID)
 
 
-__version__ = '1.11'
+def get_config_for_site(request=None):
 
-__all__ = ['config', 'default_app_config']
+    if request:
+        host = request.META.get('HTTP_HOST')
+        site_model = apps.get_model('sites', 'Site')
+
+        try:
+            site = site_model.objects.get(domain=host)
+            return SiteConfig(site.id)
+        except site_model.DoesNotExist:
+            pass
+
+    return config

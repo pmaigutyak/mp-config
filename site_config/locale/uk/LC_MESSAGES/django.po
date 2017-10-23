@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-14 10:46+0000\n"
+"POT-Creation-Date: 2017-10-23 12:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,108 +19,123 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: site_config/__init__.py:8
+#: site_config/__init__.py:17 site_config/admin.py:44
 msgid "Settings"
 msgstr "Налаштування"
 
-#: site_config/models.py:13
+#: site_config/admin.py:38
+msgid "Value"
+msgstr "Значення"
+
+#: site_config/models.py:19 site_config/models.py:78
 msgid "Input"
 msgstr "Текст (до 255 символів)"
 
-#: site_config/models.py:14 site_config/models.py:67 site_config/models.py:70
-#: site_config/models.py:89
+#: site_config/models.py:20 site_config/models.py:81 site_config/models.py:100
 msgid "Text"
 msgstr "Текст (до 10 000 символів)"
 
-#: site_config/models.py:15 site_config/models.py:72
+#: site_config/models.py:21
+msgid "HTML"
+msgstr ""
+
+#: site_config/models.py:22 site_config/models.py:83
 msgid "Integer"
 msgstr "Ціле число"
 
-#: site_config/models.py:16 site_config/models.py:74
+#: site_config/models.py:23 site_config/models.py:85
 msgid "Float"
 msgstr "Десяткове число"
 
-#: site_config/models.py:17
+#: site_config/models.py:24
 msgid "True / False"
 msgstr "Так / Ні"
 
-#: site_config/models.py:18 site_config/models.py:78
+#: site_config/models.py:25 site_config/models.py:89
 msgid "Url"
 msgstr ""
 
-#: site_config/models.py:19 site_config/models.py:80
+#: site_config/models.py:26 site_config/models.py:91
 msgid "Email"
 msgstr ""
 
-#: site_config/models.py:20 site_config/models.py:83
+#: site_config/models.py:27 site_config/models.py:94
 msgid "File"
 msgstr "Файл"
 
-#: site_config/models.py:21 site_config/models.py:86
+#: site_config/models.py:28 site_config/models.py:97
 msgid "Image"
 msgstr "Зображення"
 
-#: site_config/models.py:22
+#: site_config/models.py:29
 msgid "JSON"
 msgstr ""
 
-#: site_config/models.py:29
+#: site_config/models.py:36
 msgid "New line"
 msgstr "Новий рядок"
 
-#: site_config/models.py:30
+#: site_config/models.py:37
 msgid "Comma"
 msgstr "Кома"
 
-#: site_config/models.py:31
+#: site_config/models.py:38
 msgid "Dot"
 msgstr "Крапка"
 
-#: site_config/models.py:32
+#: site_config/models.py:39
 msgid "Semicolon"
 msgstr "Крапка з комою"
 
-#: site_config/models.py:33
+#: site_config/models.py:40
 msgid "Tab"
 msgstr "Пробіл"
 
-#: site_config/models.py:39 site_config/models.py:57
+#: site_config/models.py:46 site_config/models.py:68
 msgid "Name"
 msgstr "Назва"
 
-#: site_config/models.py:45
+#: site_config/models.py:52
 msgid "Config group"
 msgstr "Група налаштувань"
 
-#: site_config/models.py:46
+#: site_config/models.py:53
 msgid "Config groups"
 msgstr "Групи налаштувань"
 
-#: site_config/models.py:55
+#: site_config/models.py:61
+msgid "Site"
+msgstr "Сайт"
+
+#: site_config/models.py:64
+msgid "Group"
+msgstr "Група"
+
+#: site_config/models.py:66
 msgid "Label"
 msgstr "Повна назва"
 
-#: site_config/models.py:59
+#: site_config/models.py:70
 msgid "Type"
 msgstr "Тип"
 
-#: site_config/models.py:62
+#: site_config/models.py:73
 msgid "Splitter"
 msgstr "Роздільник"
 
-#: site_config/models.py:64
+#: site_config/models.py:75
 #, python-format
 msgid "Available only for types: %s"
 msgstr "Доступно тільки для типів: %s"
 
-#: site_config/models.py:76
+#: site_config/models.py:87
 msgid "Boolean"
 msgstr "Булева змінна"
 
-#: site_config/models.py:119
+#: site_config/models.py:136
 msgid "Short value"
 msgstr "Коротке значення"
 
-#: site_config/models.py:145
+#: site_config/models.py:170
 msgid "settings"
 msgstr "налаштування"

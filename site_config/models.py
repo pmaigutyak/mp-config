@@ -4,8 +4,10 @@ import json
 from bs4 import BeautifulSoup
 
 from django.db import models
+from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.utils.safestring import mark_safe
+from django.contrib.sites.models import Site
 
 
 FIELD_TYPE_INPUT = 'input'
@@ -54,6 +56,9 @@ class ConfigGroup(models.Model):
 class ConfigField(models.Model):
 
     SPLIT_TYPES = [FIELD_TYPE_TEXT, FIELD_TYPE_INPUT]
+
+    site = models.ForeignKey(
+        Site, verbose_name=_('Site'), default=settings.SITE_ID)
 
     group = models.ForeignKey(
         ConfigGroup, null=True, blank=True, verbose_name=_('Group'))
@@ -160,5 +165,6 @@ class ConfigField(models.Model):
     value = property(_get_value, _set_value)
 
     class Meta:
+        unique_together = ['site', 'name']
         ordering = ['label']
         verbose_name = verbose_name_plural = _('settings')
