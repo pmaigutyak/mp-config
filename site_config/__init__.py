@@ -9,7 +9,7 @@ default_app_config = 'site_config.SiteConfigApp'
 
 __version__ = '2.0'
 
-__all__ = ['config', 'default_app_config', 'SiteConfig', 'get_config_for_site']
+__all__ = ['default_app_config', 'SiteConfig', 'get_config_for_site']
 
 
 class SiteConfigApp(AppConfig):
@@ -47,9 +47,6 @@ class SiteConfig(object):
             raise AttributeError("Site config has no field named '%s'" % name)
 
 
-config = SiteConfig(settings.SITE_ID)
-
-
 def get_config_for_site(request=None):
 
     if request:
@@ -62,4 +59,4 @@ def get_config_for_site(request=None):
         except site_model.DoesNotExist:
             pass
 
-    return config
+    return SiteConfig(settings.SITE_ID)
