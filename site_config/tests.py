@@ -31,7 +31,7 @@ class SiteConfigTestCase(TestCase):
             type=FIELD_TYPE_INPUT,
             value_input='test value')
 
-        config = SiteConfig(SITE_1_ID)
+        config = SiteConfig()
 
         self.assertEqual(config.test, 'test value')
 
@@ -44,7 +44,7 @@ class SiteConfigTestCase(TestCase):
             type=FIELD_TYPE_INPUT,
             value_input='test value')
 
-        config = SiteConfig(SITE_2_ID)
+        config = SiteConfig()
 
         self.assertRaises(AttributeError, lambda: config.test)
 
@@ -58,7 +58,7 @@ class SiteConfigTestCase(TestCase):
             type=FIELD_TYPE_INPUT,
             value_input='test,value')
 
-        config = SiteConfig(SITE_1_ID)
+        config = SiteConfig()
 
         val = config.test
 

@@ -7,9 +7,9 @@ from django.conf import settings
 
 default_app_config = 'site_config.SiteConfigApp'
 
-__version__ = '2.0'
+__version__ = '3.0'
 
-__all__ = ['default_app_config', 'SiteConfig', 'get_config_for_site']
+__all__ = ['default_app_config', 'SiteConfig']
 
 
 class SiteConfigApp(AppConfig):
@@ -18,9 +18,6 @@ class SiteConfigApp(AppConfig):
 
 
 class SiteConfig(object):
-
-    def __init__(self, site_id):
-        self._site_id = site_id
 
     def __getattr__(self, name):
         if name.startswith('_'):
@@ -37,7 +34,7 @@ class SiteConfig(object):
     @cached_property
     def _fields(self):
         field_model = apps.get_model('site_config', 'ConfigField')
-        fields = field_model.objects.filter(site_id=self._site_id)
+        fields = field_model.objects.filter(site_id=settings.SITE_ID)
         return {f.name: f for f in fields}
 
     def _get_field(self, name):
@@ -47,16 +44,4 @@ class SiteConfig(object):
             raise AttributeError("Site config has no field named '%s'" % name)
 
 
-def get_config_for_site(request=None):
-
-    if request:
-        host = request.META.get('HTTP_HOST')
-        site_model = apps.get_model('sites', 'Site')
-
-        try:
-            site = site_model.objects.get(domain=host)
-            return SiteConfig(site.id)
-        except site_model.DoesNotExist:
-            pass
-
-    return SiteConfig(settings.SITE_ID)
+config = SiteConfig()
