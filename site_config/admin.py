@@ -8,6 +8,7 @@ from modeltranslation.utils import get_translation_fields
 from modeltranslation.admin import TranslationAdmin
 
 from site_config.models import ConfigField, ConfigGroup
+from site_config import config
 
 
 class ConfigFieldAdmin(TranslationAdmin):
@@ -64,6 +65,10 @@ class ConfigFieldAdmin(TranslationAdmin):
 
         return super(ConfigFieldAdmin, self).get_form(
             request, obj=obj, fields=fields, **kwargs)
+
+    def save_model(self, *args, **kwargs):
+        super(ConfigFieldAdmin, self).save_model(*args, **kwargs)
+        config.reload()
 
 
 admin.site.register(ConfigField, ConfigFieldAdmin)

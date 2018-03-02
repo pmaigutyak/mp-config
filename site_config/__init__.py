@@ -7,7 +7,7 @@ from django.conf import settings
 
 default_app_config = 'site_config.SiteConfigApp'
 
-__version__ = '3.0'
+__version__ = '3.1'
 
 __all__ = ['default_app_config', 'SiteConfig']
 
@@ -43,5 +43,10 @@ class SiteConfig(object):
         except KeyError:
             raise AttributeError("Site config has no field named '%s'" % name)
 
+    def reload(self):
+        try:
+            del self.__dict__['_fields']
+        except KeyError:
+            pass
 
 config = SiteConfig()
