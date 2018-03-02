@@ -40,8 +40,20 @@ $ python manage.py sync_translation_fields
 
 ### Usage
 ```
->>> from site_config import config
->>> print config.my_var
+# import config class instance
+from site_config import config
+
+# get config field value
+print config.my_var
+
+# set config field value
+config.my_var = 'example'
+
+# save updated config fields
+config.save()
+
+# reload config fields cache
+config.reload()
 ```
 
 ### Template tags
