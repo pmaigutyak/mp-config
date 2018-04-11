@@ -58,10 +58,12 @@ class ConfigField(models.Model):
     SPLIT_TYPES = [FIELD_TYPE_TEXT, FIELD_TYPE_INPUT]
 
     site = models.ForeignKey(
-        Site, verbose_name=_('Site'), default=settings.SITE_ID)
+        Site, verbose_name=_('Site'), default=settings.SITE_ID,
+        on_delete=models.CASCADE)
 
     group = models.ForeignKey(
-        ConfigGroup, null=True, blank=True, verbose_name=_('Group'))
+        ConfigGroup, null=True, blank=True, verbose_name=_('Group'),
+        on_delete=models.CASCADE)
 
     label = models.CharField(_('Label'), max_length=255)
 
