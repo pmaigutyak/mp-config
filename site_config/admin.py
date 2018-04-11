@@ -1,17 +1,24 @@
 
+from importlib import import_module
+
 from django.apps import apps
 from django.db import models
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
-from modeltranslation.utils import get_translation_fields
-from modeltranslation.admin import TranslationAdmin
-
 from site_config.models import ConfigField, ConfigGroup
 from site_config import config
 
 
-class ConfigFieldAdmin(TranslationAdmin):
+def _get_config_field_admin_base_class():
+
+    if apps.is_installed('modeltranslation'):
+        return import_module('modeltranslation.admin').TranslationAdmin
+
+    return admin.ModelAdmin
+
+
+class ConfigFieldAdmin(_get_config_field_admin_base_class()):
 
     CONFIG_FIELDS = ['site', 'group', 'label', 'name', 'type', 'splitter']
 
@@ -24,8 +31,12 @@ class ConfigFieldAdmin(TranslationAdmin):
 
         f_name = obj.value_field_name
 
-        if f_name in self.trans_opts.fields:
-            return get_translation_fields(f_name)
+        if apps.is_installed('modeltranslation'):
+
+            from modeltranslation.utils import get_translation_fields
+
+            if f_name in self.trans_opts.fields:
+                return get_translation_fields(f_name)
 
         return [f_name]
 
