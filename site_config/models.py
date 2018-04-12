@@ -101,7 +101,7 @@ class ConfigField(models.Model):
     value_json = models.TextField(
         _('Text'), max_length=10000, blank=True, null=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.label
 
     @property
