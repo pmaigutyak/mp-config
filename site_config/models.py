@@ -8,6 +8,7 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.utils.safestring import mark_safe
 from django.contrib.sites.models import Site
+from django.utils.encoding import python_2_unicode_compatible
 
 
 FIELD_TYPE_INPUT = 'input'
@@ -41,11 +42,12 @@ SPLIT_CHOICES = (
 )
 
 
+@python_2_unicode_compatible
 class ConfigGroup(models.Model):
 
     name = models.CharField(_('Name'), max_length=255, unique=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     class Meta:
@@ -53,6 +55,7 @@ class ConfigGroup(models.Model):
         verbose_name_plural = _('Config groups')
 
 
+@python_2_unicode_compatible
 class ConfigField(models.Model):
 
     SPLIT_TYPES = [FIELD_TYPE_TEXT, FIELD_TYPE_INPUT]

@@ -7,7 +7,7 @@ from django.conf import settings
 
 default_app_config = 'site_config.SiteConfigApp'
 
-__version__ = '3.3'
+__version__ = '3.4'
 
 __all__ = ['default_app_config', 'SiteConfig']
 
