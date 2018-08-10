@@ -4,10 +4,8 @@ import json
 from bs4 import BeautifulSoup
 
 from django.db import models
-from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.utils.safestring import mark_safe
-from django.contrib.sites.models import Site
 from django.utils.encoding import python_2_unicode_compatible
 
 
@@ -42,6 +40,22 @@ SPLIT_CHOICES = (
 )
 
 
+class HTMLField(models.TextField):
+
+    def __init__(
+            self,
+            verbose_name=_('HTML'),
+            blank=True,
+            null=True,
+            *args, **kwargs):
+
+        super().__init__(
+            verbose_name=verbose_name,
+            blank=blank,
+            null=null,
+            *args, **kwargs)
+
+
 @python_2_unicode_compatible
 class ConfigGroup(models.Model):
 
@@ -60,17 +74,13 @@ class ConfigField(models.Model):
 
     SPLIT_TYPES = [FIELD_TYPE_TEXT, FIELD_TYPE_INPUT]
 
-    site = models.ForeignKey(
-        Site, verbose_name=_('Site'), default=settings.SITE_ID,
-        on_delete=models.CASCADE)
-
     group = models.ForeignKey(
         ConfigGroup, null=True, blank=True, verbose_name=_('Group'),
         on_delete=models.CASCADE)
 
     label = models.CharField(_('Label'), max_length=255)
 
-    name = models.CharField(_('Name'), max_length=255)
+    name = models.CharField(_('Name'), max_length=255, unique=True)
 
     type = models.CharField(_('Type'), max_length=50, choices=FIELD_TYPES)
 
@@ -84,6 +94,8 @@ class ConfigField(models.Model):
 
     value_text = models.TextField(
         _('Text'), max_length=10000, blank=True, null=True)
+
+    value_html = HTMLField()
 
     value_int = models.IntegerField(_('Integer'), blank=True, null=True)
 
@@ -102,15 +114,13 @@ class ConfigField(models.Model):
         _('Image'), blank=True, null=True, upload_to='site_config')
 
     value_json = models.TextField(
-        _('Text'), max_length=10000, blank=True, null=True)
+        _('JSON'), max_length=10000, blank=True, null=True)
 
     def __str__(self):
         return self.label
 
     @property
     def value_field_name(self):
-        if self.type == FIELD_TYPE_HTML:
-            return 'value_%s' % FIELD_TYPE_TEXT
         return 'value_%s' % self.type
 
     def get_splitter(self):
@@ -170,6 +180,5 @@ class ConfigField(models.Model):
     value = property(_get_value, _set_value)
 
     class Meta:
-        unique_together = ['site', 'name']
         ordering = ['label']
         verbose_name = verbose_name_plural = _('settings')

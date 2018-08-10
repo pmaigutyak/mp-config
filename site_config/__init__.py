@@ -2,12 +2,9 @@
 from django.apps import apps, AppConfig
 from django.utils.translation import ugettext_lazy as _
 from django.utils.functional import cached_property
-from django.conf import settings
 
 
 default_app_config = 'site_config.SiteConfigApp'
-
-__version__ = '3.4'
 
 __all__ = ['default_app_config', 'SiteConfig']
 
@@ -37,8 +34,7 @@ class SiteConfig(object):
 
     @cached_property
     def _fields(self):
-        field_model = apps.get_model('site_config', 'ConfigField')
-        fields = field_model.objects.filter(site_id=settings.SITE_ID)
+        fields = apps.get_model('site_config', 'ConfigField').objects.all()
         return {f.name: f for f in fields}
 
     def _get_field(self, name):
@@ -59,5 +55,6 @@ class SiteConfig(object):
             del self.__dict__['_fields']
         except KeyError:
             pass
+
 
 config = SiteConfig()

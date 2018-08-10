@@ -1,11 +1,8 @@
 
-from modeltranslation.translator import translator, TranslationOptions
+from modeltranslation.translator import translator
 
 from site_config.models import ConfigField
 
 
-class ConfigFieldTranslationOptions(TranslationOptions):
-    fields = ('value_input', 'value_text', )
-
-
-translator.register(ConfigField, ConfigFieldTranslationOptions)
+translator.register(
+    ConfigField, fields=['value_input', 'value_text', 'value_html'])

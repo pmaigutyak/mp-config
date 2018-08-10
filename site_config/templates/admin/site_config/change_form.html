@@ -1,0 +1,29 @@
+
+{% extends 'admin/change_form.html' %}
+
+
+{% block footer %}
+    {{ block.super }}
+
+    <script>
+        (function ($) {
+
+            var $typeSelect = $('#{{ adminform.form.type.auto_id }}');
+
+            $typeSelect.change(function () {
+
+                var fieldType = $typeSelect.val();
+
+                $('.form-row[class*=field-value_]').hide();
+
+                if (fieldType) {
+                    $('.form-row[class*=field-value_' + fieldType + ']').show();
+                }
+
+            });
+
+            $typeSelect.trigger('change');
+
+        })(django.jQuery);
+    </script>
+{% endblock %}
