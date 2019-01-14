@@ -52,8 +52,8 @@ class SiteConfig(object):
 
     def reload(self):
         try:
-            del self.__dict__['_fields']
-        except KeyError:
+            del self._fields
+        except AttributeError:
             pass
 
 
