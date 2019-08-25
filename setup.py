@@ -6,7 +6,7 @@ with open('requirements.txt') as f:
     requires = f.read().splitlines()
 
 
-version = '4.1'
+version = '4.2'
 url = 'https://github.com/pmaigutyak/mp-config'
 
 
@@ -14,7 +14,6 @@ setup(
     name='django-mp-config',
     version=version,
     description='Django site settings app',
-    long_description=open('README.md').read(),
     author='Paul Maigutyak',
     author_email='pmaigutyak@gmail.com',
     url=url,

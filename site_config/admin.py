@@ -2,8 +2,10 @@
 from importlib import import_module
 
 from django.apps import apps
-from django.db import models
 from django.contrib import admin
+
+from import_export.resources import ModelResource
+from import_export.admin import ImportExportMixin, ExportActionMixin
 
 from site_config.models import ConfigField, ConfigGroup, HTMLField
 from site_config import config
@@ -17,7 +19,21 @@ def _get_config_field_admin_base_class():
     return admin.ModelAdmin
 
 
-class ConfigFieldAdmin(_get_config_field_admin_base_class()):
+class ConfigFieldResource(ModelResource):
+    class Meta:
+        model = ConfigField
+        exclude = ('id', 'group', )
+
+
+class ImportExportAdmin(
+        ImportExportMixin,
+        ExportActionMixin):
+    actions_on_bottom = False
+
+
+class ConfigFieldAdmin(
+        ImportExportAdmin,
+        _get_config_field_admin_base_class()):
 
     CONFIG_FIELDS = ['group', 'label', 'name', 'type', 'splitter']
 
@@ -25,6 +41,8 @@ class ConfigFieldAdmin(_get_config_field_admin_base_class()):
         'label', 'name', 'type', 'splitter', 'short_value', 'group']
 
     list_filter = ['group']
+
+    resource_class = ConfigFieldResource
 
     def __init__(self, *args, **kwargs):
 
