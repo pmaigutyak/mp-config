@@ -5,8 +5,6 @@ from django.utils.translation import ugettext_lazy as _
 
 default_app_config = 'site_config.SiteConfigApp'
 
-__all__ = ['default_app_config', 'SiteConfig']
-
 
 class SiteConfigApp(AppConfig):
     name = 'site_config'
