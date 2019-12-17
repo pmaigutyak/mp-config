@@ -1,7 +1,6 @@
 
 from django.apps import apps, AppConfig
 from django.utils.translation import ugettext_lazy as _
-from django.utils.functional import cached_property
 
 
 default_app_config = 'site_config.SiteConfigApp'
@@ -16,45 +15,26 @@ class SiteConfigApp(AppConfig):
 
 class SiteConfig(object):
 
-    def __init__(self):
-        self._updated_fields = []
-
     def __getattr__(self, name):
+
         if name.startswith('_'):
             return super(SiteConfig, self).__getattribute__(name)
 
-        return self._get_field(name).value
+        if not hasattr(self, '_cached_fields'):
+            self._cached_fields = self.get_fields()
 
-    def __setattr__(self, key, value):
-        if key.startswith('_'):
-            super(SiteConfig, self).__setattr__(key, value)
-        else:
-            self._get_field(key).value = value
-            self._updated_fields.append(key)
+        if name in self._cached_fields:
+            return self._cached_fields[name].value
 
-    @cached_property
-    def _fields(self):
+        return None
+
+    def get_fields(self):
         fields = apps.get_model('site_config', 'ConfigField').objects.all()
         return {f.name: f for f in fields}
 
-    def _get_field(self, name):
-        try:
-            return self._fields[name]
-        except KeyError:
-            raise AttributeError("Site config has no field named '%s'" % name)
-
-    def save(self):
-        for f_name, field in self._fields.items():
-            if f_name in self._updated_fields:
-                field.save()
-
-        self._updated_fields = []
-
     def reload(self):
-        try:
-            del self._fields
-        except AttributeError:
-            pass
+        if hasattr(self, '_cached_fields'):
+            del self._cached_fields
 
 
 config = SiteConfig()

@@ -4,36 +4,41 @@ from importlib import import_module
 from django.apps import apps
 from django.contrib import admin
 
-from import_export.resources import ModelResource
-from import_export.admin import ImportExportMixin, ExportActionMixin
-
 from site_config.models import ConfigField, ConfigGroup, HTMLField
 from site_config import config
 
 
-def _get_config_field_admin_base_class():
+def _get_parent_admin_classes():
 
     if apps.is_installed('modeltranslation'):
-        return import_module('modeltranslation.admin').TranslationAdmin
+        from modeltranslation.admin import TranslationAdmin
+        classes = [TranslationAdmin]
+    else:
+        classes = [admin.ModelAdmin]
 
-    return admin.ModelAdmin
+    if apps.is_installed('import_export'):
+
+        from import_export.resources import ModelResource
+        from import_export.admin import ImportExportMixin, ExportActionMixin
+
+        class ConfigFieldResource(ModelResource):
+            class Meta:
+                model = ConfigField
+                exclude = ('id', 'group', )
+
+        class ImportExportAdmin(
+                ImportExportMixin,
+                ExportActionMixin):
+
+            actions_on_bottom = False
+            resource_class = ConfigFieldResource
+
+        classes.append(ImportExportAdmin)
+
+    return classes
 
 
-class ConfigFieldResource(ModelResource):
-    class Meta:
-        model = ConfigField
-        exclude = ('id', 'group', )
-
-
-class ImportExportAdmin(
-        ImportExportMixin,
-        ExportActionMixin):
-    actions_on_bottom = False
-
-
-class ConfigFieldAdmin(
-        ImportExportAdmin,
-        _get_config_field_admin_base_class()):
+class ConfigFieldAdmin(*_get_parent_admin_classes()):
 
     CONFIG_FIELDS = ['group', 'label', 'name', 'type', 'splitter']
 
@@ -41,8 +46,6 @@ class ConfigFieldAdmin(
         'label', 'name', 'type', 'splitter', 'short_value', 'group']
 
     list_filter = ['group']
-
-    resource_class = ConfigFieldResource
 
     def __init__(self, *args, **kwargs):
 
