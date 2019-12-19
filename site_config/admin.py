@@ -1,6 +1,4 @@
 
-from importlib import import_module
-
 from django.apps import apps
 from django.contrib import admin
 
@@ -38,6 +36,7 @@ def _get_parent_admin_classes():
     return classes
 
 
+@admin.register(ConfigField)
 class ConfigFieldAdmin(*_get_parent_admin_classes()):
 
     CONFIG_FIELDS = ['group', 'label', 'name', 'type', 'splitter']
@@ -68,5 +67,4 @@ class ConfigFieldAdmin(*_get_parent_admin_classes()):
         config.reload()
 
 
-admin.site.register(ConfigField, ConfigFieldAdmin)
 admin.site.register(ConfigGroup)
