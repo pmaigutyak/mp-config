@@ -6,7 +6,6 @@ from bs4 import BeautifulSoup
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.safestring import mark_safe
-from django.utils.encoding import python_2_unicode_compatible
 
 
 FIELD_TYPE_INPUT = 'input'
@@ -56,7 +55,6 @@ class HTMLField(models.TextField):
             *args, **kwargs)
 
 
-@python_2_unicode_compatible
 class ConfigGroup(models.Model):
 
     name = models.CharField(_('Name'), max_length=255, unique=True)
@@ -69,7 +67,6 @@ class ConfigGroup(models.Model):
         verbose_name_plural = _('Config groups')
 
 
-@python_2_unicode_compatible
 class ConfigField(models.Model):
 
     SPLIT_TYPES = [FIELD_TYPE_TEXT, FIELD_TYPE_INPUT]
