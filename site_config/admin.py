@@ -2,7 +2,7 @@
 from django.apps import apps
 from django.contrib import admin
 
-from site_config.models import ConfigField, ConfigGroup, HTMLField
+from site_config.models import ConfigField, HTMLField
 from site_config import config
 
 
@@ -46,6 +46,8 @@ class ConfigFieldAdmin(*_get_parent_admin_classes()):
 
     list_filter = ['group']
 
+    list_per_page = 200
+
     def __init__(self, *args, **kwargs):
 
         super().__init__(*args, **kwargs)
@@ -65,6 +67,3 @@ class ConfigFieldAdmin(*_get_parent_admin_classes()):
     def save_model(self, *args, **kwargs):
         super(ConfigFieldAdmin, self).save_model(*args, **kwargs)
         config.reload()
-
-
-admin.site.register(ConfigGroup)

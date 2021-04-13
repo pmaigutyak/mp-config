@@ -25,11 +25,6 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterField(
             model_name='configfield',
-            name='group',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='site_config.ConfigGroup', verbose_name='Group'),
-        ),
-        migrations.AlterField(
-            model_name='configfield',
             name='type',
             field=models.CharField(choices=[(b'input', 'Input'), (b'text', 'Text'), (b'html', 'HTML'), (b'int', 'Integer'), (b'float', 'Float'), (b'bool', 'True / False'), (b'url', 'Url'), (b'email', 'Email'), (b'file', 'File'), (b'image', 'Image'), (b'json', 'JSON')], max_length=50, verbose_name='Type'),
         ),

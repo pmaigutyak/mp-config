@@ -55,25 +55,9 @@ class HTMLField(models.TextField):
             *args, **kwargs)
 
 
-class ConfigGroup(models.Model):
-
-    name = models.CharField(_('Name'), max_length=255, unique=True)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = _('Config group')
-        verbose_name_plural = _('Config groups')
-
-
 class ConfigField(models.Model):
 
     SPLIT_TYPES = [FIELD_TYPE_TEXT, FIELD_TYPE_INPUT]
-
-    group = models.ForeignKey(
-        ConfigGroup, null=True, blank=True, verbose_name=_('Group'),
-        on_delete=models.CASCADE)
 
     label = models.CharField(_('Label'), max_length=255)
 

@@ -13,18 +13,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.CreateModel(
-            name='ConfigGroup',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255, unique=True, verbose_name='Name')),
-            ],
-            options={
-                'verbose_name': 'Config group',
-                'verbose_name_plural': 'Config groups',
-            },
-        ),
-
         migrations.AddField(
             model_name='configfield',
             name='value_json',
@@ -39,10 +27,5 @@ class Migration(migrations.Migration):
             model_name='configfield',
             name='type',
             field=models.CharField(choices=[(b'input', 'Input'), (b'text', 'Text'), (b'int', 'Integer'), (b'float', 'Float'), (b'bool', 'True / False'), (b'url', 'Url'), (b'email', 'Email'), (b'file', 'File'), (b'image', 'Image'), (b'json', 'JSON')], max_length=50, verbose_name='Type'),
-        ),
-        migrations.AddField(
-            model_name='configfield',
-            name='group',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='site_config.ConfigGroup'),
         ),
     ]

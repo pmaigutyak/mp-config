@@ -12,3 +12,5 @@ class SiteConfigSettings(object):
         return super().CONTEXT_PROCESSORS + [
             'site_config.context_processors.config'
         ]
+
+default = SiteConfigSettings
