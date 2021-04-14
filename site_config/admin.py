@@ -2,6 +2,8 @@
 from django.apps import apps
 from django.contrib import admin
 
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
+
 from site_config.models import ConfigField, HTMLField
 from site_config import config
 
@@ -22,7 +24,7 @@ def _get_parent_admin_classes():
         class ConfigFieldResource(ModelResource):
             class Meta:
                 model = ConfigField
-                exclude = ('id', 'group', )
+                exclude = ('id', )
 
         class ImportExportAdmin(
                 ImportExportMixin,
@@ -39,31 +41,19 @@ def _get_parent_admin_classes():
 @admin.register(ConfigField)
 class ConfigFieldAdmin(*_get_parent_admin_classes()):
 
-    CONFIG_FIELDS = ['group', 'label', 'name', 'type', 'splitter']
+    CONFIG_FIELDS = ['label', 'name', 'type', 'splitter']
 
     list_display = [
-        'label', 'name', 'type', 'splitter', 'short_value', 'group']
-
-    list_filter = ['group']
+        'label', 'name', 'type', 'splitter', 'short_value']
 
     list_per_page = 200
 
-    def __init__(self, *args, **kwargs):
-
-        super().__init__(*args, **kwargs)
-
-        if apps.is_installed('ckeditor_uploader'):
-            from ckeditor_uploader.widgets import CKEditorUploadingWidget
-            self.formfield_overrides = {
-                HTMLField: {'widget': CKEditorUploadingWidget}
-            }
-
-        elif apps.is_installed('ckeditor'):
-            from ckeditor.widgets import CKEditorWidget
-            self.formfield_overrides = {
-                HTMLField: {'widget': CKEditorWidget}
-            }
 
     def save_model(self, *args, **kwargs):
         super(ConfigFieldAdmin, self).save_model(*args, **kwargs)
         config.reload()
+
+    class Meta:
+        formfield_overrides = {
+            HTMLField: {'widget': CKEditorUploadingWidget}
+        }
