@@ -2,6 +2,7 @@
 import json
 
 from bs4 import BeautifulSoup
+from ckeditor_uploader.fields import RichTextUploadingField
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -39,22 +40,6 @@ SPLIT_CHOICES = (
 )
 
 
-class HTMLField(models.TextField):
-
-    def __init__(
-            self,
-            verbose_name=_('HTML'),
-            blank=True,
-            null=True,
-            *args, **kwargs):
-
-        super().__init__(
-            verbose_name=verbose_name,
-            blank=blank,
-            null=null,
-            *args, **kwargs)
-
-
 class ConfigField(models.Model):
 
     SPLIT_TYPES = [FIELD_TYPE_TEXT, FIELD_TYPE_INPUT]
@@ -76,7 +61,11 @@ class ConfigField(models.Model):
     value_text = models.TextField(
         _('Text'), max_length=10000, blank=True, null=True)
 
-    value_html = HTMLField()
+    value_html = RichTextUploadingField(
+        verbose_name=_('HTML'),
+        blank=True,
+        null=True
+    )
 
     value_int = models.IntegerField(_('Integer'), blank=True, null=True)
 

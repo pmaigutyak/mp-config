@@ -2,9 +2,7 @@
 from django.apps import apps
 from django.contrib import admin
 
-from ckeditor_uploader.widgets import CKEditorUploadingWidget
-
-from site_config.models import ConfigField, HTMLField
+from site_config.models import ConfigField
 from site_config import config
 
 
@@ -48,12 +46,6 @@ class ConfigFieldAdmin(*_get_parent_admin_classes()):
 
     list_per_page = 200
 
-
     def save_model(self, *args, **kwargs):
         super(ConfigFieldAdmin, self).save_model(*args, **kwargs)
         config.reload()
-
-    class Meta:
-        formfield_overrides = {
-            HTMLField: {'widget': CKEditorUploadingWidget}
-        }

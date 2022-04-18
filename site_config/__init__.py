@@ -3,6 +3,16 @@ from django.apps import apps, AppConfig
 from django.utils.translation import ugettext_lazy as _
 
 
+def setup_settings(settings, is_prod, **kwargs):
+
+    if 'djckeditor' not in settings['INSTALLED_APPS']:
+        settings['INSTALLED_APPS'] += ['djckeditor']
+
+    for template in settings['TEMPLATES']:
+        template['OPTIONS']['context_processors'].append(
+            'site_config.context_processors.config')
+
+
 default_app_config = 'site_config.SiteConfigApp'
 
 
