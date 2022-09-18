@@ -71,7 +71,7 @@ class ConfigField(models.Model):
 
     value_float = models.IntegerField(_('Float'), blank=True, null=True)
 
-    value_bool = models.NullBooleanField(_('Boolean'), blank=True)
+    value_bool = models.BooleanField(_('Boolean'), blank=True, null=True)
 
     value_url = models.URLField(_('Url'), blank=True, null=True)
 
