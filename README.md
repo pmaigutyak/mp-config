@@ -29,6 +29,14 @@ INSTALLED_APPS = [
 ]
 ```
 
+Context processors:
+```
+site_config.context_processors.config
+```
+Example of usage in template:
+```{{ config.test }}```
+
+
 Run migrations:
 ```
 $ python manage.py migrate
@@ -75,3 +83,4 @@ App require this packages:
 
 * django-modeltranslation
 * beautifulsoup4
+* django-ckeditor

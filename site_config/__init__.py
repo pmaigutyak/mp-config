@@ -20,6 +20,9 @@ class SiteConfigApp(AppConfig):
     name = 'site_config'
     verbose_name = _("Settings")
 
+    def ready(self):
+        if not apps.is_installed("ckeditor"):
+            raise Exception("Please add `ckeditor` to `INSTALLED_APPS`.")
 
 class SiteConfig(object):
 

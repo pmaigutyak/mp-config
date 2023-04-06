@@ -2,11 +2,7 @@
 from setuptools import setup, find_packages
 
 
-with open('requirements.txt') as f:
-    requires = f.read().splitlines()
-
-
-version = '5.0.1'
+version = '5.0.2'
 url = 'https://github.com/pmaigutyak/mp-config'
 
 
@@ -21,5 +17,4 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     license='MIT',
-    install_requires=requires
 )

@@ -1,8 +1,16 @@
 
 import json
 
-from bs4 import BeautifulSoup
-from ckeditor_uploader.fields import RichTextUploadingField
+try:
+    from bs4 import BeautifulSoup
+except ImportError:
+    raise Exception("MP-config app requires `bs4`. Please add `beautifulsoup4` to your requirements.")
+
+try:
+    from ckeditor_uploader.fields import RichTextUploadingField
+except ImportError:
+    raise Exception("MP-config app requires `Ckeditor`. Please install `django-ckeditor`.")
+
 
 from django.db import models
 from django.utils.translation import gettext_lazy as _
