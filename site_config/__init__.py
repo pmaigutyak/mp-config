@@ -1,28 +1,13 @@
 
-from django.apps import apps, AppConfig
-from django.utils.translation import gettext_lazy as _
+from django.apps import apps
 
 
 def setup_settings(settings, is_prod, **kwargs):
-
-    if 'djckeditor' not in settings['INSTALLED_APPS']:
-        settings['INSTALLED_APPS'] += ['djckeditor']
 
     for template in settings['TEMPLATES']:
         template['OPTIONS']['context_processors'].append(
             'site_config.context_processors.config')
 
-
-default_app_config = 'site_config.SiteConfigApp'
-
-
-class SiteConfigApp(AppConfig):
-    name = 'site_config'
-    verbose_name = _("Settings")
-
-    def ready(self):
-        if not apps.is_installed("ckeditor"):
-            raise Exception("Please add `ckeditor` to `INSTALLED_APPS`.")
 
 class SiteConfig(object):
 

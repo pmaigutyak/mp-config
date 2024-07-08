@@ -4,12 +4,12 @@ import json
 try:
     from bs4 import BeautifulSoup
 except ImportError:
-    raise Exception("MP-config app requires `bs4`. Please add `beautifulsoup4` to your requirements.")
+    raise Exception("MP-config app requires `beautifulsoup4`.")
 
 try:
-    from ckeditor_uploader.fields import RichTextUploadingField
+    from django_prose_editor.fields import ProseEditorField
 except ImportError:
-    raise Exception("MP-config app requires `Ckeditor`. Please install `django-ckeditor`.")
+    raise Exception("MP-config app requires `django-prose-editor`.")
 
 
 from django.db import models
@@ -69,7 +69,7 @@ class ConfigField(models.Model):
     value_text = models.TextField(
         _('Text'), max_length=10000, blank=True, null=True)
 
-    value_html = RichTextUploadingField(
+    value_html = ProseEditorField(
         verbose_name=_('HTML'),
         blank=True,
         null=True

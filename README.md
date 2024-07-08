@@ -83,4 +83,4 @@ App require this packages:
 
 * django-modeltranslation
 * beautifulsoup4
-* django-ckeditor
+* django-prose-editor
