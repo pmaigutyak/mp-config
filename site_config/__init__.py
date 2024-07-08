@@ -1,5 +1,6 @@
 
 from django.apps import apps
+from django.utils.functional import SimpleLazyObject
 
 
 def setup_settings(settings, is_prod, **kwargs):
@@ -9,7 +10,7 @@ def setup_settings(settings, is_prod, **kwargs):
             'site_config.context_processors.config')
 
 
-class SiteConfig(object):
+class SiteConfig:
 
     def __getattr__(self, name):
 
@@ -25,12 +26,12 @@ class SiteConfig(object):
         return None
 
     def get_fields(self):
-        fields = apps.get_model('site_config', 'ConfigField').objects.all()
-        return {f.name: f for f in fields}
+        from site_config.models import ConfigField
+        return {f.name: f for f in ConfigField.objects.all()}
 
     def reload(self):
         if hasattr(self, '_cached_fields'):
             del self._cached_fields
 
 
-config = SiteConfig()
+config = SimpleLazyObject(lambda: SiteConfig())
