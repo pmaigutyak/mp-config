@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 
 
-version = '6.0.0'
+version = '6.0.1'
 url = 'https://github.com/pmaigutyak/mp-config'
 
 
